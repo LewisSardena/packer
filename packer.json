@@ -13,7 +13,7 @@
     "token": "{{user `aws_session_token`}}",
     "region": "eu-west-1",
     "source_ami": "ami-4cbe0935",
-    "instace_type": "t2.micro",
+    "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
     "associate_public_ip_address": "true",
     "ami_name": "docker_production_aws-ecs_base {{timestamp}}",
