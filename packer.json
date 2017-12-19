@@ -6,24 +6,24 @@
     "time_zone": "{{env `TIME_ZONE`}}"
   },
   "builders": [
-  {
-    "type": "amazon-ebs",
-    "access_key": "{{user `aws_access_key_id`}}",
-    "secret_key": "{{user `aws_secret_access_key`}}",
-    "token": "{{user `aws_session_token`}}",
-    "region": "eu-west-1",
-    "source_ami": "ami-4cbe0935",
-    "instance_type": "t2.micro",
-    "ssh_username": "ec2-user",
-    "associate_public_ip_address": "true",
-    "ami_name": "docker_production_aws-ecs_base {{timestamp}}",
-    "tags": {
-      "Name": "Docker Production AWS ECS Base image",
-      "SourceAMI": "ami-4cbe0935",
-      "DockerVersion": "1.12.6",
-      "ECSAgentVersion": "1.13.1"
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key_id`}}",
+      "secret_key": "{{user `aws_secret_access_key`}}",
+      "token": "{{user `aws_session_token`}}",
+      "region": "eu-west-1",
+      "source_ami": "ami-4cbe0935",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "associate_public_ip_address": "true",
+      "ami_name": "docker-production-aws-ecs-base {{timestamp}}",
+      "tags": {
+        "Name": "Docker Production AWS ECS Base Image 2017.09.c",
+        "SourceAMI": "ami-f5fc2c8d",
+        "DockerVersion": "17.06.2",
+        "ECSAgentVersion": "1.15.2"
+      }
     }
-  }
   ],
   "provisioners": [
     {
@@ -35,7 +35,7 @@
     },
     {
       "type": "shell",
-      "script": "scripts/set-docker-options.sh"
+      "script": "scripts/install-os-packages.sh"
     },
     {
       "type": "shell",
@@ -46,12 +46,8 @@
       "script": "scripts/cleanup.sh"
     },
     {
-      "type": "shell",
-      "script": "scripts/install-os-packages.sh"
-    },
-    {
       "type": "file",
-      "source": "files/firstrun.sh"
+      "source": "files/firstrun.sh",
       "destination": "/home/ec2-user/firstrun.sh"
     }
   ],
